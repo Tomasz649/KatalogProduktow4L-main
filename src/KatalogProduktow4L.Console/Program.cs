@@ -60,6 +60,6 @@ List<Produkt> produktydziedziczone = new List<Produkt>
 };
 
 
-produktydziedziczone.Sort();
+produktydziedziczone.Sort((pierwszy, drugi) => pierwszy.Cena.CompareTo(drugi.Cena));
 
 var produktyAlfabetyczne = produktydziedziczone.OrderBy(p => p.Cena).ToList();
