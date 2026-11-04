@@ -38,6 +38,33 @@ namespace KatalogProduktow4L.Core
                 }
             }
         }
+
+        public static List<Produkt> Szukaj(List<Produkt> produkty, string szukanaNazwa)
+        {
+            if (produkty == null)
+            {
+                throw new ArgumentNullException(nameof(produkty));
+            }
+
+            if (szukanaNazwa == null)
+            {
+                throw new ArgumentNullException(nameof(szukanaNazwa));
+            }
+
+            var znalezioneProdukty = new List<Produkt>();
+
+            foreach (var produkt in produkty)
+            {
+                if (produkt?.Nazwa != null &&
+                    produkt.Nazwa.Contains(szukanaNazwa, StringComparison.OrdinalIgnoreCase))
+                {
+                    znalezioneProdukty.Add(produkt);
+                }
+            }
+
+            return znalezioneProdukty;
+        }
+
         //tu nadpisujemy defaultowa funkcje tostring dla wszystkich obiektow w c#
         public override string ToString()
         {

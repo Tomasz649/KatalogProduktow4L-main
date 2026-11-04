@@ -94,6 +94,8 @@ namespace KatalogProduktow4L.Tests
 
 
     [TestMethod]
+
+
         public void SzukajProduktowWKategoriach()
         {
 
@@ -107,6 +109,135 @@ namespace KatalogProduktow4L.Tests
             {
                 StringAssert.Contains(produkt.Nazwa, szukanaNazwa, $"Znaleziony produkt {produkt.Nazwa} powinien zawierać '{szukanaNazwa}' w nazwie.");
             }
+        }
+
+
+
+        [TestMethod]
+        public void SzukajProduktowPoNazwie_ZwracaPoprawnaLiczbeWynikow()
+        {
+            var produkty = PrzygotujListeProduktów();
+
+            var znalezioneProdukty = Produkt.Szukaj(produkty, "000");
+
+            Assert.AreEqual(9, znalezioneProdukty.Count);
+        }
+
+
+
+        private List<Produkt> PrzygotujListeZKategoriami()
+        {
+            return new List<Produkt>
+            {
+                new Produkt { Nazwa = "Produkt1", Kategoria = "Kategoria1", Cena = 10, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt2", Kategoria = "Kategoria1", Cena = 20, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt3", Kategoria = "Kategoria1", Cena = 30, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt4", Kategoria = "Kategoria1", Cena = 40, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt5", Kategoria = "Kategoria1", Cena = 50, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt6", Kategoria = "Kategoria2", Cena = 60, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt7", Kategoria = "Kategoria2", Cena = 70, Ilosc = 1 },
+                new Produkt { Nazwa = "Produkt8", Kategoria = "Kategoria3", Cena = 80, Ilosc = 1 }
+            };
+        }
+
+
+
+        [TestMethod]
+        public void Produkty_MajaDokladnieTrzyKategorie()
+        {
+            var produkty = PrzygotujListeZKategoriami();
+
+            var liczbaKategorii = produkty
+                .Select(p => p.Kategoria)
+                .Distinct()
+                .Count();
+
+            Assert.AreEqual(3, liczbaKategorii);
+        }
+
+
+
+        [TestMethod]
+        public void Kategoria1_MaPieciuProduktow()
+        {
+            var produkty = PrzygotujListeZKategoriami();
+
+            var liczbaProduktow = produkty.Count(p => p.Kategoria == "Kategoria1");
+
+            Assert.AreEqual(5, liczbaProduktow);
+        }
+
+        [TestMethod]
+        public void PusteZamowienie_MaWartoscZero()
+        {
+            var zamowienie = new Zamowienie();
+
+            Assert.AreEqual(0, zamowienie.WartoscZamowienia);
+        }
+
+
+
+
+        [TestMethod]
+        public void DodanieTegoSamegoProduktu_ZwiekszaIloscJednejPozycji()
+        {
+            var zamowienie = new Zamowienie();
+            var produkt = new Produkt { Nazwa = "Produkt", Cena = 10 };
+
+            zamowienie.Dodaj(produkt, 2);
+            zamowienie.Dodaj(produkt, 3);
+
+            Assert.AreEqual(1, zamowienie.Pozycje.Count);
+            Assert.AreEqual(5, zamowienie.Pozycje[0].Ilosc);
+            Assert.AreEqual(50, zamowienie.WartoscZamowienia);
+        }
+
+        [TestMethod]
+        public void DodanieProduktuZIlosciaZeroLubUjemna_RzucaWyjatek()
+        {
+            var zamowienie = new Zamowienie();
+            var produkt = PrzygotujProdukt();
+
+            var wyjatek = Assert.ThrowsExactly<ArgumentException>(
+                () => zamowienie.Dodaj(produkt, 0));
+
+            StringAssert.Contains(wyjatek.Message, "Ilość musi być większa od zera.");
+        }
+
+        [TestMethod]
+        public void Zamowienie_LiczyWartoscPodzespoluIUslugi()
+        {
+            var zamowienie = new Zamowienie();
+            var podzespol = new Podzespol { Nazwa = "Podzespół", Cena = 25 };
+            var usluga = new usługa { Nazwa = "Usługa", Cena = 100 };
+
+            zamowienie.Dodaj(podzespol, 2);
+            zamowienie.Dodaj(usluga, 1);
+
+            Assert.AreEqual(150, zamowienie.WartoscZamowienia);
+        }
+
+        [TestMethod]
+        public void Usluga_MaWartoscMagazynuRownaZero()
+        {
+            var usluga = new usługa { Nazwa = "Usługa", Cena = 20, Ilosc = 5 };
+
+            Assert.AreEqual(0, usluga.WartoscMagazynu);
+        }
+
+        [TestMethod]
+        public void OpisAkcesorium_ZawieraKolor()
+        {
+            var akcesorium = new Accessory
+            {
+                Nazwa = "Akcesorium1",
+                Cena = 15,
+                Kategoria = "Kategoria2",
+                Ilosc = 3,
+                color = "Czerwony"
+            };
+
+            StringAssert.Contains(akcesorium.Opis(), "Czerwony");
         }
 
 
