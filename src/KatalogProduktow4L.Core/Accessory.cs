@@ -4,13 +4,13 @@ using System.Text;
 
 namespace KatalogProduktow4L.Core
 {
-    class Accessory
+    public class Accessory : Produkt
     {
         public string color { get; set; }
 
-        public override string Description()
+        public override string Opis()
         {
-            return $"Color: {color},Product: {Product},Cost: {Cost}, Category: {Category}, Quantity: {Quantity}";
+            return $"Kolor: {color}, Nazwa: {Nazwa}, Cena: {Cena}, Kategoria: {Kategoria}, Ilość: {Ilosc}";
         }
     }
 }

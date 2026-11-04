@@ -74,7 +74,7 @@ namespace KatalogProduktow4L.Tests
             var produkty = PrzygotujListeProduktów();
             // Act
             int licznik = 0;
-            foreach(var produkt in produkty)
+            foreach (var produkt in produkty)
             {
                 if (produkt.Cena > 0)
                 {
@@ -88,5 +88,27 @@ namespace KatalogProduktow4L.Tests
         //1. Sprawdzamy czy są dokładnie 3 kategorie produktów w liście
         //2. Sprawdzamy czy w kategorii "Kategoria1" jest dokładnie 5 produktów
         //Najpierw napiszcie sobie funkcję pomocniczą która przygotuje wam dane do testów
+    
+
+
+
+
+    [TestMethod]
+        public void SzukajProduktowWKategoriach()
+        {
+
+            // Arrange
+            var produkty = PrzygotujListeProduktów();
+            string szukanaNazwa = "Produkt1"; // szukamy produktów zawierających "Produkt1" w nazwie
+                                              // Act
+            var znalezioneProdukty = Produkt.Szukaj(produkty, szukanaNazwa);
+            // Assert
+            foreach (var produkt in znalezioneProdukty)
+            {
+                StringAssert.Contains(produkt.Nazwa, szukanaNazwa, $"Znaleziony produkt {produkt.Nazwa} powinien zawierać '{szukanaNazwa}' w nazwie.");
+            }
+        }
+
+
     }
 }

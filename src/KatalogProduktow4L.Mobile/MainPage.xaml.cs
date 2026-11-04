@@ -24,20 +24,44 @@ namespace KatalogProduktow4L.Mobile
         }
         private void DodajProdukt_Clicked(object sender, EventArgs e)
         {
-            //odczytujemy wartości z pól tekstowych
-            string nazwa = nazwaEntry.Text;
-            double cena = double.Parse(cenaEntry.Text);
-            string kategoria = kategoriaPicker.SelectedItem.ToString();
+            errorLabel.IsVisible = false;
+
+            if (string.IsNullOrWhiteSpace(nazwaEntry.Text))
+            {
+                PokazBlad("Wpisz nazwę produktu.");
+                return;
+            }
+
+            if (!double.TryParse(cenaEntry.Text, out double cena) || cena < 0)
+            {
+                PokazBlad("Wpisz poprawną, nieujemną cenę.");
+                return;
+            }
+
+            if (kategoriaPicker.SelectedItem is not string kategoria)
+            {
+                PokazBlad("Wybierz kategorię produktu.");
+                return;
+            }
 
             //tworzymy nową instancję produktu
             Produkt nowyProdukt = new Produkt
             {
-                Nazwa = nazwa,
+                Nazwa = nazwaEntry.Text.Trim(),
                 Cena = cena,
                 Kategoria = kategoria,
                 Ilosc = 0 // domyślna ilość
             };
             Produkty.Add(nowyProdukt);
+            nazwaEntry.Text = string.Empty;
+            cenaEntry.Text = string.Empty;
+            kategoriaPicker.SelectedItem = null;
+        }
+
+        private void PokazBlad(string komunikat)
+        {
+            errorLabel.Text = komunikat;
+            errorLabel.IsVisible = true;
         }
         private void UsunProdukt_Clicked(object sender, EventArgs e)
         {

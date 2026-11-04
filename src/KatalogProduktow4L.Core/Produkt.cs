@@ -10,7 +10,7 @@ namespace KatalogProduktow4L.Core
         public double Cena { get; set; }
         public string Kategoria { get; set; }
         public int Ilosc { get; set; }
-        public double WartoscMagazynu
+        public virtual double WartoscMagazynu
         {
             get { return Cena * Ilosc ; }
         }
