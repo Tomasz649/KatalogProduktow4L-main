@@ -1,4 +1,8 @@
-﻿using KatalogProduktow4L.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using KatalogProduktow4L.Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KatalogProduktow4L.Tests
 {
