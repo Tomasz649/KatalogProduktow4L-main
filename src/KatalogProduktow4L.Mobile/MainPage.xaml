@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KatalogProduktow4L.Mobile.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+			<!-- wyszukiwanie  z poprzednich zajęć-->
+            <Label Text="Wyszukiwanie:" />
+            <Entry x:Name="searchEntry" Placeholder="Wpisz nazwę produktu" />
+            <Button Text="Szukaj" Clicked="Button_Clicked" />
+			<!-- dzisiejsze dodawanie -->
+			<Entry x:Name="nazwaEntry" Placeholder="Nazwa produktu" />
+			<Entry x:Name="cenaEntry" Placeholder="Cena produktu" Keyboard="Numeric" />
+			<Picker x:Name="kategoriaPicker" Title="Wybierz kategorię">
+                <Picker.Items>
+                    <x:String>Elektronika</x:String>
+                    <x:String>Odzież</x:String>
+                    <x:String>Jedzenie</x:String>
+                </Picker.Items>
+            </Picker>
+			<Label x:Name="errorLabel" TextColor="Red" IsVisible="False" />
+			<Button Text="Dodaj produkt" Clicked="DodajProdukt_Clicked" />
+			<!-- // dzisiejsze dodawanie -->
+            <CollectionView x:Name="productsCollectionView" ItemsSource="{Binding Produkty}" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+						<Grid Padding="10" ColumnDefinitions="*,*,*" BackgroundColor="LightGray" Margin="5">
+							<Label Grid.Column="0" Text="{Binding Nazwa}" FontAttributes="Bold" />
+							<Label Grid.Column="1" Text="{Binding Kategoria}" />
+							<Label Grid.Column="2" Text="{Binding Cena, StringFormat='Cena: {0:C}'}" />
+						</Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            
+            </CollectionView>
+			<Button Text="Usuń produkt" Clicked="UsunProdukt_Clicked" />
+        </VerticalStackLayout>
+		
+    </ScrollView>
+
+</ContentPage>
