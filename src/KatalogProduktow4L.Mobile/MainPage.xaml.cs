@@ -5,22 +5,25 @@ namespace KatalogProduktow4L.Mobile
 {
     public partial class MainPage : ContentPage
     {
+        private readonly List<Produkt> bazaProduktow;
         public ObservableCollection<Produkt> Produkty { get; set; }
 
         public MainPage()
         {
-            Produkty = new ObservableCollection<Produkt>
+            bazaProduktow = new List<Produkt>
             {
                 new Produkt { Nazwa = "Produkt1", Cena = 10.0, Kategoria = "Kategoria1", Ilosc = 5 },
                 new Produkt { Nazwa = "Produkt2", Cena = 20.0, Kategoria = "Kategoria2", Ilosc = 3 },
                 new Produkt { Nazwa = "Produkt3", Cena = 15.0, Kategoria = "Kategoria1", Ilosc = 8 }
             };
+            Produkty = new ObservableCollection<Produkt>();
             InitializeComponent();
             BindingContext = this;
+            OdswiezListe();
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
-         
+            OdswiezListe();
         }
         private void DodajProdukt_Clicked(object sender, EventArgs e)
         {
@@ -52,7 +55,8 @@ namespace KatalogProduktow4L.Mobile
                 Kategoria = kategoria,
                 Ilosc = 0 // domyślna ilość
             };
-            Produkty.Add(nowyProdukt);
+            bazaProduktow.Add(nowyProdukt);
+            OdswiezListe();
             nazwaEntry.Text = string.Empty;
             cenaEntry.Text = string.Empty;
             kategoriaPicker.SelectedItem = null;
@@ -67,7 +71,19 @@ namespace KatalogProduktow4L.Mobile
         {
             if (productsCollectionView.SelectedItem is Produkt wybranyProdukt)
             {
-                Produkty.Remove(wybranyProdukt);
+                bazaProduktow.Remove(wybranyProdukt);
+                OdswiezListe();
+            }
+        }
+
+        private void OdswiezListe()
+        {
+            var wyniki = Produkt.Szukaj(bazaProduktow, searchEntry.Text?.Trim() ?? string.Empty);
+
+            Produkty.Clear();
+            foreach (var produkt in wyniki)
+            {
+                Produkty.Add(produkt);
             }
         }
     }

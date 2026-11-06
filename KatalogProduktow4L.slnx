@@ -1,10 +1,11 @@
 <Solution>
   <Project Path="src/KatalogProduktow4L.Console/KatalogProduktow4L.Console.csproj" />
-  <Project Path="tests/KatalogProduktow4L.Tests/KatalogProduktow4L.Tests.csproj" />
+  <Project Path="src/KatalogProduktow4L.Core/KatalogProduktow4L.Core.csproj" />
+  <Project Path="src/KatalogProduktow4L.Desktop/KatalogProduktow4L.Desktop.csproj" />
   <Project Path="src/KatalogProduktow4L.Mobile/KatalogProduktow4L.Mobile.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
-  <Project Path="src/KatalogProduktow4L.Core/KatalogProduktow4L.Core.csproj" />
-  <Project Path="src/KatalogProduktow4L.Desktop/KatalogProduktow4L.Desktop.csproj" />
+  <Project Path="SzczegolyPage/SzczegolyPage.csproj" Id="be4680ba-a70c-4983-876a-3bc72b2d0b66" />
+  <Project Path="tests/KatalogProduktow4L.Tests/KatalogProduktow4L.Tests.csproj" />
 </Solution>
 
