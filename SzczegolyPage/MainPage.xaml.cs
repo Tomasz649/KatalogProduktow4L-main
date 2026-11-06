@@ -1,24 +1,21 @@
-﻿namespace SzczegolyPage
+﻿using KatalogProduktow4L.Core;
+using Xamarin.KotlinX.Coroutines.Channels;
+
+namespace KatalogProduktow4L.Mobile;
+
+public partial class SzczegolyPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    // strona dostaje produkt z zewnątrz - to jest "przekazanie danych"
+    public SzczegolyPage(Produkt produkt)
     {
-        int count = 0;
+        InitializeComponent();
+        BindingContext = produkt;          // etykiety z {Binding ...} czytają z tego obiektu
+        opisLabel.Text = produkt.Opis();   // Opis() wywołany na konkretnym obiekcie
+    }
 
-        public MainPage()
-        {
-            InitializeComponent();
-        }
-
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+    private async void Wroc_Clicked(object sender, EventArgs e)
+    {
+        // zdejmij tę stronę ze stosu - wracamy do poprzedniej
+        await Navigation.PopAsync();
     }
 }

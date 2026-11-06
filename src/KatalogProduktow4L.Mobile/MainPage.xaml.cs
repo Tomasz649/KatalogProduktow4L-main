@@ -14,7 +14,23 @@ namespace KatalogProduktow4L.Mobile
             {
                 new Produkt { Nazwa = "Produkt1", Cena = 10.0, Kategoria = "Kategoria1", Ilosc = 5 },
                 new Produkt { Nazwa = "Produkt2", Cena = 20.0, Kategoria = "Kategoria2", Ilosc = 3 },
-                new Produkt { Nazwa = "Produkt3", Cena = 15.0, Kategoria = "Kategoria1", Ilosc = 8 }
+                new Produkt { Nazwa = "Produkt3", Cena = 15.0, Kategoria = "Kategoria1", Ilosc = 8 },
+                new Podzespol
+                {
+                    Nazwa = "Dysk SSD",
+                    Cena = 250.0,
+                    Kategoria = "Elektronika",
+                    Ilosc = 4,
+                    Producent = "Kingston"
+                },
+                new usługa
+                {
+                    Nazwa = "Montaż podzespołu",
+                    Cena = 80.0,
+                    Kategoria = "Usługi",
+                    Ilosc = 1,
+                    Producent = "Serwis Katalog"
+                }
             };
             Produkty = new ObservableCollection<Produkt>();
             InitializeComponent();
@@ -86,5 +102,37 @@ namespace KatalogProduktow4L.Mobile
                 Produkty.Add(produkt);
             }
         }
+        private async void Szczegoly_Clicked(object sender, EventArgs e)
+        {
+            if (productsCollectionView.SelectedItem is Produkt wybrany)
+            {
+                // połóż nową stronę na stos i przekaż jej zaznaczony produkt
+                await Navigation.PushAsync(new SzczegolyPage(wybrany));
+            }
+            else
+            {
+                await DisplayAlertAsync("Brak wyboru", "Najpierw zaznacz produkt na liście.", "OK");
+            }
+        }
+
+        // PushAsync przekazuje produkt bezpośrednio do konstruktora strony.
+        // Shell tworzy stronę na podstawie trasy, a produkt przekazuje w słowniku.
+        // Przy większej aplikacji wybrałbym Shell, bo centralizuje trasy i upraszcza
+        // nawigowanie między wieloma stronami.
+        private async void SzczegolyShell_Clicked(object sender, EventArgs e)
+        {
+            if (productsCollectionView.SelectedItem is Produkt wybrany)
+            {
+                await Shell.Current.GoToAsync(nameof(SzczegolyPage), new Dictionary<string, object>
+                {
+                    ["Produkt"] = wybrany
+                });
+            }
+            else
+            {
+                await DisplayAlertAsync("Brak wyboru", "Najpierw zaznacz produkt na liście.", "OK");
+            }
+        }
+
     }
 }

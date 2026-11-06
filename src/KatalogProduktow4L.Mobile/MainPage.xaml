@@ -39,6 +39,8 @@
             
             </CollectionView>
 			<Button Text="Usuń produkt" Clicked="UsunProdukt_Clicked" />
+            <Button Text="Szczegóły" Clicked="Szczegoly_Clicked" />
+            <Button Text="Szczegóły (Shell)" Clicked="SzczegolyShell_Clicked" />
         </VerticalStackLayout>
 		
     </ScrollView>
