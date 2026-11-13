@@ -6,11 +6,14 @@ public partial class SzczegolyPage : ContentPage, IQueryAttributable
 {
     private bool otwartaPrzezShell;
     private Action<Produkt> onDelete;
+    private Action<Produkt> onUpdate;
+    private Produkt aktualnyProdukt;
 
-    public SzczegolyPage(Produkt produkt, Action<Produkt> onDelete = null)
+    public SzczegolyPage(Produkt produkt, Action<Produkt> onDelete = null, Action<Produkt> onUpdate = null)
     {
         InitializeComponent();
         this.onDelete = onDelete;
+        this.onUpdate = onUpdate;
         UstawProdukt(produkt);
     }
 
@@ -31,6 +34,7 @@ public partial class SzczegolyPage : ContentPage, IQueryAttributable
 
     private void UstawProdukt(Produkt produkt)
     {
+        aktualnyProdukt = produkt;
         BindingContext = produkt;
         opisLabel.Text = produkt.Opis();
     }
@@ -47,6 +51,43 @@ public partial class SzczegolyPage : ContentPage, IQueryAttributable
         }
     }
 
+    private async void Zapisz_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(nazwaEntry.Text))
+            {
+                await DisplayAlert("B³¹d", "Nazwa nie mo¿e byæ pusta", "OK");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(kategoriaEntry.Text))
+            {
+                await DisplayAlert("B³¹d", "Kategoria nie mo¿e byæ pusta", "OK");
+                return;
+            }
+
+            if (!decimal.TryParse(cenaEntry.Text, out decimal cena) || cena <= 0)
+            {
+                await DisplayAlert("B³¹d", "Cena musi byæ liczb¹ wiêksz¹ ni¿ 0", "OK");
+                return;
+            }
+
+            aktualnyProdukt.Nazwa = nazwaEntry.Text;
+            aktualnyProdukt.Kategoria = kategoriaEntry.Text;
+            aktualnyProdukt.Cena = (double)cena;
+
+            onUpdate?.Invoke(aktualnyProdukt);
+            BindingContext = aktualnyProdukt;
+            opisLabel.Text = aktualnyProdukt.Opis();
+
+            await DisplayAlert("Sukces", "Produkt zosta³ zaktualizowany", "OK");
+        }
+        catch
+        {
+            await DisplayAlert("B³¹d", "Nie uda³o siê zapisaæ zmian", "OK");
+        }
+    }
 
     private async void UsunProdukt_Clicked(object sender, EventArgs e)
     {

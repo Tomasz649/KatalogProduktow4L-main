@@ -5,14 +5,22 @@
              Title="Szczegóły produktu">
 
     <VerticalStackLayout Padding="30" Spacing="15">
-        <Label Text="{Binding Nazwa}" FontSize="24" FontAttributes="Bold" />
-        <Label Text="{Binding Kategoria, StringFormat='Kategoria: {0}'}" />
-        <Label Text="{Binding Cena, StringFormat='Cena: {0:C}'}" />
+        <Label Text="Nazwa:" FontAttributes="Bold" />
+        <Entry x:Name="nazwaEntry" Text="{Binding Nazwa}" />
+
+        <Label Text="Kategoria:" FontAttributes="Bold" />
+        <Entry x:Name="kategoriaEntry" Text="{Binding Kategoria}" />
+
+        <Label Text="Cena:" FontAttributes="Bold" />
+        <Entry x:Name="cenaEntry" Text="{Binding Cena}" Keyboard="Numeric" />
+
         <Label Text="{Binding Ilosc, StringFormat='W magazynie: {0} szt.'}" />
         <Label Text="{Binding WartoscMagazynu, StringFormat='Wartość magazynu: {0:C}'}" />
         <Label x:Name="opisLabel" />
+
+        <Button Text="Zapisz zmiany" Clicked="Zapisz_Clicked" />
         <Button Text="Wróć do listy" Clicked="Wroc_Clicked" />
-        <Button Text="Usuń produkt" Clicked="UsunProdukt_Clicked" x:Name="usunButton" />
+        <Button Text="Usunąć produkt" Clicked="UsunProdukt_Clicked" />
     </VerticalStackLayout>
 
 </ContentPage>

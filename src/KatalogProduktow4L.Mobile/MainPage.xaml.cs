@@ -121,11 +121,16 @@ namespace KatalogProduktow4L.Mobile
         {
             if (productsCollectionView.SelectedItem is Produkt wybrany)
             {
-                await Navigation.PushAsync(new SzczegolyPage(wybrany, produkt =>
-                {
-                    bazaProduktow.Remove(produkt);
-                    OdswiezListe();
-                }));
+                await Navigation.PushAsync(new SzczegolyPage(wybrany,
+                    produkt => 
+                    {
+                        bazaProduktow.Remove(produkt);
+                        OdswiezListe();
+                    },
+                    produkt =>
+                    {
+                        OdswiezListe();
+                    }));
             }
             else
             {
