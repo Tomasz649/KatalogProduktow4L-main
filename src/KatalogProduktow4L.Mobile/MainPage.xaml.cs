@@ -76,6 +76,18 @@ namespace KatalogProduktow4L.Mobile
             nazwaEntry.Text = string.Empty;
             cenaEntry.Text = string.Empty;
             kategoriaPicker.SelectedItem = null;
+
+
+            try
+            {
+                Produkt.SprawdzWartosc(nowyProdukt);
+
+            }
+            catch (ArgumentException ex)
+            {
+                PokazBlad(ex.Message);
+
+            }
         }
 
         private void PokazBlad(string komunikat)

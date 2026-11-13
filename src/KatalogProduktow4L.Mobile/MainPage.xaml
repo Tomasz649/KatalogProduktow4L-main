@@ -25,7 +25,7 @@
 			<Button Text="Dodaj produkt" Clicked="DodajProdukt_Clicked" />
 			<!-- // dzisiejsze dodawanie -->
             <CollectionView x:Name="productsCollectionView" ItemsSource="{Binding Produkty}" SelectionMode="Single">
-                <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>    
                     <DataTemplate>
 
 						<Grid Padding="10" ColumnDefinitions="*,*,*" BackgroundColor="LightGray" Margin="5">
