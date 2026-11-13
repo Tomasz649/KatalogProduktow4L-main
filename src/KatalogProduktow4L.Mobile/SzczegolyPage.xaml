@@ -12,6 +12,7 @@
         <Label Text="{Binding WartoscMagazynu, StringFormat='Wartość magazynu: {0:C}'}" />
         <Label x:Name="opisLabel" />
         <Button Text="Wróć do listy" Clicked="Wroc_Clicked" />
+        <Button Text="Usuń produkt" Clicked="UsunProdukt_Clicked" x:Name="usunButton" />
     </VerticalStackLayout>
 
 </ContentPage>

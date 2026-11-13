@@ -73,6 +73,9 @@ namespace KatalogProduktow4L.Mobile
             };
             bazaProduktow.Add(nowyProdukt);
             OdswiezListe();
+            infoLabel.IsVisible = true;
+            infoLabel.Text = $"Dodano produkt: {nowyProdukt.Nazwa}";
+
             nazwaEntry.Text = string.Empty;
             cenaEntry.Text = string.Empty;
             kategoriaPicker.SelectedItem = null;
@@ -118,8 +121,11 @@ namespace KatalogProduktow4L.Mobile
         {
             if (productsCollectionView.SelectedItem is Produkt wybrany)
             {
-                // połóż nową stronę na stos i przekaż jej zaznaczony produkt
-                await Navigation.PushAsync(new SzczegolyPage(wybrany));
+                await Navigation.PushAsync(new SzczegolyPage(wybrany, produkt =>
+                {
+                    bazaProduktow.Remove(produkt);
+                    OdswiezListe();
+                }));
             }
             else
             {

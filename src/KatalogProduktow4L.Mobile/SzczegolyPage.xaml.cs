@@ -5,10 +5,12 @@ namespace KatalogProduktow4L.Mobile;
 public partial class SzczegolyPage : ContentPage, IQueryAttributable
 {
     private bool otwartaPrzezShell;
+    private Action<Produkt> onDelete;
 
-    public SzczegolyPage(Produkt produkt)
+    public SzczegolyPage(Produkt produkt, Action<Produkt> onDelete = null)
     {
         InitializeComponent();
+        this.onDelete = onDelete;
         UstawProdukt(produkt);
     }
 
@@ -42,6 +44,25 @@ public partial class SzczegolyPage : ContentPage, IQueryAttributable
         else
         {
             await Navigation.PopAsync();
+        }
+    }
+
+
+    private async void UsunProdukt_Clicked(object sender, EventArgs e)
+    {
+        bool confirmed = await DisplayAlert("Potwierdzenie", "Na pewno chcesz usun¹æ ten produkt?", "Tak", "Nie");
+
+        if (confirmed && BindingContext is Produkt produkt)
+        {
+            onDelete?.Invoke(produkt);
+            if (otwartaPrzezShell)
+            {
+                await Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                await Navigation.PopAsync();
+            }
         }
     }
 }

@@ -23,7 +23,8 @@
             </Picker>
 			<Label x:Name="errorLabel" TextColor="Red" IsVisible="False" />
 			<Button Text="Dodaj produkt" Clicked="DodajProdukt_Clicked" />
-			<!-- // dzisiejsze dodawanie -->
+            <Label x:Name="infoLabel" TextColor="Green" IsVisible="False" />
+            <!-- // dzisiejsze dodawanie -->
             <CollectionView x:Name="productsCollectionView" ItemsSource="{Binding Produkty}" SelectionMode="Single">
                 <CollectionView.ItemTemplate>    
                     <DataTemplate>
