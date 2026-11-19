@@ -6,7 +6,7 @@ namespace KatalogProduktow4L.Core
 {
     public interface IWyceniany
     {
-        String Nazwa { get; set; }
+        string Nazwa { get; set; }
         double Cena { get; set; }
     }
 }

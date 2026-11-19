@@ -6,8 +6,19 @@
         xmlns:local="clr-namespace:KatalogProduktow4L.Desktop"
         mc:Ignorable="d"
         Title="KatalogProduktow4L.Desktop" Height="450" Width="800">
-    <StackPanel >
-        <TextBlock Text="Katalog Produktów" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="24"/>
-        <ListBox x:Name="ProductsListBox" DisplayMemberPath="Nazwa" SelectionChanged="ProductsListBox_SelectionChanged" />
+
+    <StackPanel>
+        <TextBlock Text="Katalog Produktów"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   FontSize="24"/>
+
+        <ListBox x:Name="ProductsListBox"
+                 DisplayMemberPath="Nazwa"
+                 SelectionChanged="ProductsListBox_SelectionChanged" Height="100"/>
+
+        <TextBlock x:Name="DetailsTextBlock"
+                   Margin="10"
+                   TextWrapping="Wrap"/>
     </StackPanel>
 </Window>

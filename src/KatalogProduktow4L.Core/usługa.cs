@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KatalogProduktow4L.Core
 {
-    public class usługa : Produkt
+    public class Usluga : Produkt
     {
         public string Producent { get; set; }
 
@@ -14,7 +14,5 @@ namespace KatalogProduktow4L.Core
         {
             return $"Usługa: {Nazwa}, Producent: {Producent}, Cena: {Cena}, Kategoria: {Kategoria}, Ilość: {Ilosc}";
         }
-
-
     }
 }

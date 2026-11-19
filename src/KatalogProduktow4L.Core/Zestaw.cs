@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace KatalogProduktow4L.Core
 {
@@ -8,16 +10,13 @@ namespace KatalogProduktow4L.Core
     {
         private readonly List<Produkt> skladniki;
 
-
-
         public string Nazwa { get; set; }
+
         public Zestaw(string nazwa, List<Produkt> produkty)
         {
             Nazwa = nazwa;
             skladniki = produkty ?? new List<Produkt>();
         }
-
-
 
         public double Cena => skladniki.Sum(p => p.Cena);
 
