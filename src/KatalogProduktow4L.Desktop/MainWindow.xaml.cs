@@ -1,21 +1,11 @@
-﻿using System.Text;
+﻿
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Collections.Generic;
 using KatalogProduktow4L.Core;
 
 namespace KatalogProduktow4L.Desktop
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -55,11 +45,16 @@ namespace KatalogProduktow4L.Desktop
             ProductsListBox.ItemsSource = produkty;
         }
 
-        private void ProductsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ProductsListBox_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
         {
             if (ProductsListBox.SelectedItem is Produkt produkt)
             {
                 DetailsTextBlock.Text = produkt.Opis();
+            }
+            else
+            {
+                DetailsTextBlock.Text = "";
             }
         }
     }

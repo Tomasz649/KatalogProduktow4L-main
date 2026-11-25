@@ -55,8 +55,8 @@ List<Produkt> produktydziedziczone = new List<Produkt>
 {
     new Podzespol { Nazwa = "Podzespol1", Cena = 50.0, Kategoria = "Kategoria1", Ilosc = 10, Producent = "Producent1" },
     new Podzespol { Nazwa = "Podzespol2", Cena = 75.0, Kategoria = "Kategoria2", Ilosc = 5, Producent = "Producent2" },
-    new usługa { Nazwa = "Usługa1", Cena = 100.0, Kategoria = "Kategoria3", Ilosc = 0 },
-    new usługa { Nazwa = "Usługa2", Cena = 150.0, Kategoria = "Kategoria4", Ilosc = 0 }
+    new Usluga { Nazwa = "Usługa1", Cena = 100.0, Kategoria = "Kategoria3", Ilosc = 0 },
+    new Usluga { Nazwa = "Usługa2", Cena = 150.0, Kategoria = "Kategoria4", Ilosc = 0 }
 };
 
 
