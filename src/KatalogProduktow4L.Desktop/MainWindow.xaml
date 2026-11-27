@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KatalogProduktow4L.Desktop"
         mc:Ignorable="d"
         Title="Katalog Produktów"
-        Height="600" Width="800">
+        Height="836" Width="1176">
 
     <Grid Margin="20">
 
@@ -38,6 +38,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
+
                         <TextBlock Text="{Binding Nazwa}"
                                    Width="220"
                                    FontWeight="Bold"/>
@@ -48,6 +49,7 @@
                         <TextBlock Text="{Binding Cena,
                                    StringFormat={}{0:F2} zł}"
                                    Width="100"/>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -55,79 +57,67 @@
         </ListBox>
 
         <!-- Szczegóły produktu -->
-
         <Grid Grid.Row="1"
-      Grid.Column="1"
-      Margin="20,0,0,0">
+              Grid.Column="1"
+              Margin="20,0,0,0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
             <!-- SZCZEGÓŁY PRODUKTU -->
             <GroupBox Header="Szczegóły produktu"
-              Grid.Row="0"
-              Margin="0,0,0,10"
-              Padding="10">
+                      Grid.Row="0"
+                      Margin="0,0,0,10"
+                      Padding="10">
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                     <StackPanel>
 
                         <TextBlock x:Name="DetailsTextBlock"
-                           TextWrapping="Wrap"
-                           Margin="0,0,0,10"/>
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,10"/>
 
-                        <TextBlock Text="Nazwa:" FontWeight="Bold"/>
+                        <TextBlock Text="Nazwa:"
+                                   FontWeight="Bold"/>
+
                         <TextBox x:Name="NameTextBox"
-                         IsReadOnly="True"
-                         Margin="0,0,0,10"/>
+                                 IsReadOnly="True"
+                                 Margin="0,0,0,10"/>
 
-                        <TextBlock Text="Kategoria:" FontWeight="Bold"/>
+                        <TextBlock Text="Kategoria:"
+                                   FontWeight="Bold"/>
+
                         <ComboBox x:Name="CategoryComboBox"
-                          IsEnabled="False"
-                          Margin="0,0,0,10"/>
+                                  IsEnabled="False"
+                                  Margin="0,0,0,10"/>
 
-                        <CheckBox x:Name="IsAvailableCheckBox"
-                          Content="Promocja"
-                          IsEnabled="False"
-                          Margin="0,0,0,10"/>
+                        <TextBlock Text="Ilość:"
+                                   FontWeight="Bold"/>
 
-                        <TextBlock Text="Cena:" FontWeight="Bold"/>
+                        <TextBox x:Name="QuantityTextBox"
+                                 IsReadOnly="True"
+                                 Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Cena:"
+                                   FontWeight="Bold"/>
+
                         <TextBox x:Name="PriceTextBox"
-                         IsReadOnly="True"
-                         Margin="0,0,0,10"/>
+                                 IsReadOnly="True"
+                                 Margin="0,0,0,10"/>
 
-                        <TextBlock Text="Data dostawy:"
-                           FontWeight="Bold"
-                           Margin="0,0,0,5"/>
-
-                        <DatePicker x:Name="DeliveryDatePicker"
-                            SelectedDateFormat="Short"
-                            IsEnabled="False"
-                            Margin="0,0,0,10"/>
-
-                        <TextBlock Text="Sposób dostawy:"
-                           FontWeight="Bold"
-                           Margin="0,0,0,5"/>
+                        <TextBlock Text="Wartość magazynu:"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,5"/>
 
                         <StackPanel Orientation="Vertical"
-                            Margin="0,0,0,10">
-
-                            <RadioButton x:Name="DeliveryMethodRadioButton1"
-                                 Content="Kurier"
-                                 IsEnabled="False"
-                                 Margin="0,0,0,5"/>
-
-                            <RadioButton x:Name="DeliveryMethodRadioButton2"
-                                 Content="Poczta"
-                                 IsEnabled="False"/>
-
+                                    Margin="0,0,0,10">
                         </StackPanel>
 
                         <StackPanel x:Name="AdditionalStackPanel"
-                            Margin="0,10,0,0"/>
+                                    Margin="0,10,0,0"/>
 
                     </StackPanel>
 
@@ -137,73 +127,121 @@
 
             <!-- DODAWANIE PRODUKTU -->
             <GroupBox Header="Dodaj produkt"
-              Grid.Row="1"
-              Padding="10">
+                      Grid.Row="1"
+                      Padding="10">
 
-                <Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <Grid Margin="0,5">
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0"
-                       Grid.Column="0"
-                       Text="Nazwa:"
-                       VerticalAlignment="Center"
-                       Margin="0,5,10,5"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="NewNameTextBox"
-                     Grid.Row="0"
-                     Grid.Column="1"
-                     Margin="0,5"/>
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Nazwa:"
+                                   VerticalAlignment="Center"
+                                   Margin="0,5"/>
 
-                    <TextBlock Grid.Row="1"
-                       Grid.Column="0"
-                       Text="Cena:"
-                       VerticalAlignment="Center"
-                       Margin="0,5,10,5"/>
+                        <TextBox x:Name="NewNameTextBox"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
+                                 Margin="0,5"/>
 
-                    <TextBox x:Name="NewPriceTextBox"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     Margin="0,5"/>
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="Cena:"
+                                   VerticalAlignment="Center"
+                                   Margin="0,5"/>
 
-                    <TextBlock Grid.Row="2"
-                       Grid.Column="0"
-                       Text="Kategoria:"
-                       VerticalAlignment="Center"
-                       Margin="0,5,10,5"/>
+                        <TextBox x:Name="NewPriceTextBox"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 Margin="0,5"/>
 
-                    <ComboBox x:Name="NewCategoryComboBox"
-                      Grid.Row="2"
-                      Grid.Column="1"
-                      Margin="0,5"/>
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="0"
+                                   Text="Kategoria:"
+                                   VerticalAlignment="Center"
+                                   Margin="0,5"/>
 
-                    <Button Grid.Row="3"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Content="Dodaj produkt"
-                    Height="30"
-                    Margin="0,10,0,0"/>
+                        <ComboBox x:Name="NewCategoryComboBox"
+                                  Grid.Row="2"
+                                  Grid.Column="1"
+                                  Margin="0,5"/>
 
-                </Grid>
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="0"
+                                   Text="Ilość:"
+                                   VerticalAlignment="Center"
+                                   Margin="0,5"/>
+
+                        <TextBox x:Name="NewQuantityTextBox"
+                                 Grid.Row="3"
+                                 Grid.Column="1"
+                                 Margin="0,5"/>
+
+                        <TextBlock Grid.Row="4"
+                                   Grid.Column="0"
+                                   Text="Rodzaj:"
+                                   VerticalAlignment="Top"
+                                   Margin="0,5"/>
+
+                        <StackPanel Grid.Row="4"
+                                    Grid.Column="1"
+                                    Orientation="Vertical"
+                                    Margin="0,5">
+
+                            <RadioButton x:Name="ProduktRadioButton"
+                                        Content="Produkt"
+                                        GroupName="Rodzaj"
+                                        IsChecked="True"
+                                        Margin="0,3"/>
+
+                            <RadioButton x:Name="PodzespolRadioButton"
+                                        Content="Podzespół"
+                                        GroupName="Rodzaj"
+                                        Margin="0,3"/>
+
+                            <RadioButton x:Name="AkcesoriumRadioButton"
+                                        Content="Akcesorium"
+                                        GroupName="Rodzaj"
+                                        Margin="0,3"/>
+
+                            <RadioButton x:Name="UslugaRadioButton"
+                                        Content="Usługa"
+                                        GroupName="Rodzaj"
+                                        Margin="0,3"/>
+
+                        </StackPanel>
+
+                        <Button Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="Dodaj produkt"
+                                Height="30"
+                                Margin="0,10,0,5"
+                                Click="AddProductButton_Click"/>
+
+                    </Grid>
+
+                </ScrollViewer>
 
             </GroupBox>
 
         </Grid>
 
-
-        
-
-
-
     </Grid>
+
 </Window>
